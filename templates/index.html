@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Recommendation System</title>
+    <title>Akıllı Film Öneri Sistemi</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Intelligent Movie Recommendations</h1>
-            <p class="subtitle">Discover movies you'll love using advanced recommendation algorithms</p>
+            <h1>Akıllı Film Öneri Sistemi</h1>
+            <p class="subtitle">Gelişmiş algoritmalar ile size özel film önerileri keşfedin</p>
         </header>
 
         <main>
             <section class="selection-panel">
-                <h2>Select a Movie</h2>
+                <h2>Film Seçin</h2>
                 <div class="form-group">
-                    <label for="movie-select">Choose a movie to get recommendations:</label>
+                    <label for="movie-select">Öneri almak istediğiniz filmi seçin:</label>
                     <select id="movie-select">
-                        <option value="">-- Select a movie --</option>
+                        <option value="">-- Film seçin --</option>
                         {% for movie in movies %}
                         <option value="{{ movie.movieId }}" data-genres="{{ movie.genres }}">
                             {{ movie.title }}
@@ -29,33 +29,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Recommendation Method:</label>
+                    <label>Öneri Yöntemi:</label>
                     <div class="method-buttons">
                         <button class="method-btn active" data-method="hybrid">
                             <span class="icon">&#x2728;</span>
-                            Hybrid
-                            <span class="desc">Best of both worlds</span>
+                            Hibrit Sistem
+                            <span class="desc">En iyi sonuç için iki yöntem birleşik</span>
                         </button>
                         <button class="method-btn" data-method="content">
                             <span class="icon">&#x1F3AC;</span>
-                            Content-Based
-                            <span class="desc">Similar genres</span>
+                            İçerik Tabanlı
+                            <span class="desc">Benzer türler ve içerik</span>
                         </button>
                         <button class="method-btn" data-method="collaborative">
                             <span class="icon">&#x1F465;</span>
-                            Collaborative
-                            <span class="desc">User preferences</span>
+                            İşbirlikçi Filtreleme
+                            <span class="desc">Benzer kullanıcıların tercihleri</span>
                         </button>
                     </div>
                 </div>
 
                 <button id="get-recommendations" class="primary-btn" disabled>
-                    Get Recommendations
+                    Önerileri Getir
                 </button>
             </section>
 
             <section id="source-movie" class="source-panel hidden">
-                <h3>Selected Movie</h3>
+                <h3>Seçilen Film</h3>
                 <div class="movie-card source">
                     <h4 id="source-title"></h4>
                     <p class="genres" id="source-genres"></p>
@@ -63,33 +63,15 @@
             </section>
 
             <section id="results" class="results-panel hidden">
-                <h2>Recommended Movies</h2>
+                <h2>Önerilen Filmler</h2>
                 <p id="method-explanation" class="method-info"></p>
                 <div id="recommendations-list" class="recommendations-grid">
-                </div>
-            </section>
-
-            <section class="info-panel">
-                <h3>How It Works</h3>
-                <div class="info-cards">
-                    <div class="info-card">
-                        <h4>Content-Based Filtering</h4>
-                        <p>Analyzes movie genres using TF-IDF (Term Frequency-Inverse Document Frequency) and cosine similarity. Movies with similar genre profiles are recommended.</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Collaborative Filtering</h4>
-                        <p>Identifies movies that users with similar tastes enjoyed. If users who liked Movie A also liked Movie B, these movies are considered similar.</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Hybrid System</h4>
-                        <p>Combines both approaches for more robust recommendations. This balances genre similarity with actual user preferences.</p>
-                    </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>Intelligent Movie Recommendation System</p>
+            <p>Akıllı Film Öneri Sistemi - Kişiselleştirilmiş önerilerle film keşfedin</p>
         </footer>
     </div>
 
@@ -121,7 +103,7 @@
                 if (!movieId) return;
 
                 getRecsBtn.disabled = true;
-                getRecsBtn.textContent = 'Loading...';
+                getRecsBtn.textContent = 'Yükleniyor...';
 
                 try {
                     const response = await fetch('/api/recommend', {
@@ -139,10 +121,10 @@
                     displayResults(data);
                 } catch (error) {
                     console.error('Error:', error);
-                    recsList.innerHTML = '<p class="error">Failed to get recommendations. Please try again.</p>';
+                    recsList.innerHTML = '<p class="error">Öneriler alınamadı. Lütfen tekrar deneyin.</p>';
                 } finally {
                     getRecsBtn.disabled = false;
-                    getRecsBtn.textContent = 'Get Recommendations';
+                    getRecsBtn.textContent = 'Önerileri Getir';
                 }
             });
 
@@ -152,14 +134,14 @@
                 sourceSection.classList.remove('hidden');
 
                 const methodExplanations = {
-                    'hybrid': 'Combining genre similarity and user preferences for balanced recommendations',
-                    'content': 'Recommending movies with similar genres using TF-IDF analysis',
-                    'collaborative': 'Recommending movies based on similar user rating patterns'
+                    'hybrid': 'Hem tür benzerliği hem de kullanıcı tercihleri birleştirilerek dengeli öneriler sunuluyor',
+                    'content': 'TF-IDF analizi ile benzer türlerdeki filmler öneriliyor',
+                    'collaborative': 'Benzer kullanıcıların puanlama kalıplarına göre filmler öneriliyor'
                 };
                 document.getElementById('method-explanation').textContent = methodExplanations[data.method];
 
                 if (data.recommendations.length === 0) {
-                    recsList.innerHTML = '<p class="no-results">No recommendations found for this movie with the selected method.</p>';
+                    recsList.innerHTML = '<p class="no-results">Bu film için seçilen yöntemle öneri bulunamadı.</p>';
                 } else {
                     recsList.innerHTML = data.recommendations.map((rec, index) => `
                         <div class="recommendation-card" style="animation-delay: ${index * 0.1}s">
@@ -167,16 +149,26 @@
                             <h4 class="rec-title">${rec.title}</h4>
                             <p class="rec-genres">${rec.genres.replace(/\|/g, ' | ')}</p>
                             <div class="score-badge">
-                                Score: ${(rec.score * 100).toFixed(1)}%
+                                Benzerlik: ${(rec.score * 100).toFixed(1)}%
                             </div>
-                            <div class="reason">
-                                <strong>Why recommended:</strong>
-                                <p>${rec.reason}</p>
+                            <div class="explanation-box">
+                                <div class="explanation-header">
+                                    <span class="explanation-icon">&#x1F4A1;</span>
+                                    <strong>Bu Film Neden Öneriliyor?</strong>
+                                </div>
+                                <p class="explanation-text">${rec.explanation}</p>
+                                ${rec.detailed_reason ? `<p class="detailed-reason">${rec.detailed_reason}</p>` : ''}
                             </div>
                             ${rec.method === 'hybrid' ? `
                                 <div class="score-breakdown">
-                                    <span class="content-score">Genre: ${(rec.content_score * 100).toFixed(0)}%</span>
-                                    <span class="collab-score">Users: ${(rec.collab_score * 100).toFixed(0)}%</span>
+                                    <div class="score-item content">
+                                        <span class="score-label">İçerik Benzerliği</span>
+                                        <span class="score-value">${(rec.content_score * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <div class="score-item collab">
+                                        <span class="score-label">Kullanıcı Tercihi</span>
+                                        <span class="score-value">${(rec.collab_score * 100).toFixed(0)}%</span>
+                                    </div>
                                 </div>
                             ` : ''}
                         </div>

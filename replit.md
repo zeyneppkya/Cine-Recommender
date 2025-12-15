@@ -1,47 +1,55 @@
-# Intelligent Movie Recommendation System
+# Akıllı Film Öneri Sistemi
 
-## Overview
-A Flask-based web application that provides intelligent movie recommendations using three different algorithms:
-- **Content-Based Filtering**: Uses TF-IDF on movie genres with cosine similarity
-- **Item-Based Collaborative Filtering**: Uses user rating patterns
-- **Hybrid System**: Combines both approaches for better recommendations
+## Genel Bakış
+Üç farklı algoritma kullanarak akıllı film önerileri sunan Flask tabanlı bir web uygulaması:
+- **İçerik Tabanlı Filtreleme**: Film türlerinde TF-IDF ve cosine similarity kullanır
+- **İşbirlikçi Filtreleme**: Kullanıcı puanlama kalıplarını kullanır
+- **Hibrit Sistem**: Daha iyi öneriler için her iki yaklaşımı birleştirir
 
-## Project Structure
+## Proje Yapısı
 ```
-├── app.py                 # Main Flask application with recommendation engines
-├── movies.csv             # Movie data (movieId, title, genres)
-├── ratings.csv            # User ratings data (userId, movieId, rating)
+├── app.py                 # Ana Flask uygulaması ve öneri motorları
+├── movies.csv             # Film verileri (movieId, title, genres)
+├── ratings.csv            # Kullanıcı puanları (userId, movieId, rating)
 ├── templates/
-│   └── index.html         # Main web interface
+│   └── index.html         # Ana web arayüzü
 ├── static/
-│   └── style.css          # Styling
-└── replit.md              # This documentation file
+│   └── style.css          # Stil dosyası
+└── replit.md              # Bu dokümantasyon dosyası
 ```
 
-## How to Run
-Click the Run button or execute `python app.py`. The application will start on port 5000.
+## Nasıl Çalıştırılır
+Run butonuna tıklayın veya `python app.py` komutunu çalıştırın. Uygulama 5000 portunda başlayacaktır.
 
 ## API Endpoints
-- `GET /` - Main web interface
-- `POST /api/recommend` - Get recommendations for a movie
-- `GET /api/movies` - Get list of all movies
+- `GET /` - Ana web arayüzü
+- `POST /api/recommend` - Bir film için öneriler al
+- `GET /api/movies` - Tüm filmlerin listesini al
 
-## Recommendation Algorithms
+## Öneri Algoritmaları
 
-### Content-Based Filtering
-Uses TF-IDF (Term Frequency-Inverse Document Frequency) to vectorize movie genres and calculates cosine similarity between movies.
+### İçerik Tabanlı Filtreleme
+Film türlerini vektörize etmek için TF-IDF (Term Frequency-Inverse Document Frequency) kullanır ve filmler arasındaki cosine similarity'yi hesaplar.
 
-### Collaborative Filtering
-Creates a user-item rating matrix and calculates item-item similarity based on how users rate movies.
+### İşbirlikçi Filtreleme
+Kullanıcı-film puanlama matrisi oluşturur ve kullanıcıların filmleri nasıl puanladığına göre film-film benzerliği hesaplar.
 
-### Hybrid System
-Combines both methods with weighted averaging (default 50% each) for more robust recommendations.
+### Hibrit Sistem
+Her iki yöntemi ağırlıklı ortalama ile birleştirir (varsayılan %50 her biri) daha güçlü öneriler için.
 
-## Dependencies
+## Açıklanabilir Öneriler
+Her öneri için kullanıcıya neden bu filmin önerildiği açıklanır:
+- "Bu filmi aksiyon filmlerini sevdiğiniz için öneriyoruz"
+- "Benzer kullanıcılar bu filmi yüksek puanladı"
+- "Bu film hem tür benzerliği hem de kullanıcı tercihleri açısından size uygun"
+
+## Bağımlılıklar
 - Flask
 - pandas
 - scikit-learn
 - numpy
 
-## Recent Changes
-- December 2025: Initial implementation with all three recommendation systems
+## Son Değişiklikler
+- Aralık 2025: Türkçe arayüz ve Netflix temalı tasarım
+- Aralık 2025: Açıklanabilir öneriler (Explainability) özelliği eklendi
+- Aralık 2025: "How It Works" bölümü kaldırıldı, daha sade arayüz

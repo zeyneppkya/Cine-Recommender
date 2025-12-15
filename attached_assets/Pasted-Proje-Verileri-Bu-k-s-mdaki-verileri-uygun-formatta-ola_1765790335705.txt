@@ -1,0 +1,62 @@
+Proje Verileri (Bu kısımdaki verileri uygun formatta olarak kendiniz ekleyebilirsiniz ya da veri
+seti gerekirse lütfen durumu bildirin)
+Sistem iki temel veri seti ile çalışır:
+1. movies.csv
+o film ID
+o film adı
+o film türü (genres)
+2. ratings.csv
+o kullanıcı ID
+o film ID
+o verilen puan
+1. Bileşen: Content-Based Filtering (İçerik Tabanlı Öneri)
+Bu modülün amacı: Bir filme benzeyen diğer filmleri matematiksel olarak bulmak.
+Kullanılan teknik
+TF-IDF (Term Frequency – Inverse Document Frequency)
+Bu teknik metinleri sayısal vektörlere dönüştürür. Filmlerin türleri, film tanıtımları veya
+açıklamaları kullanılarak her film için bir içerik profili çıkarılır. Örneğin: "Comedy|Romance" → bir
+vektöre dönüştürülür. Bu sayısal vektör, filmin DNA’sı gibidir. Hangi türde kaç baskınlığı var
+görülebilir.
+Cosine Similarity
+İki film vektörünün yönü karşılaştırılarak aralarındaki benzerlik ölçülür. Cosine Similarity:
+• 1’e yakınsa → çok benzer
+• 0 civarındaysa → alakasız
+Bu sayede “Toy Story’e en benzeyen 5 film nedir?” sorusuna cevap alınır.
+İçerik tabanlı sistemin avantajı:
+• Kullanıcı puanına ihtiyaç yoktur
+• Yeni filmleri hızlıca önerir
+• Film içeriğini anlamaya çalışır
+
+2. Bileşen: Collaborative Filtering (Kullanıcı Davranışına Dayanan Öneri)
+Bu sistem içerikten bağımsızdır. Tamamen kullanıcıların film puanlarına bakar.
+Mantık şudur: Benimle aynı filmleri beğenen kişiler hangi diğer filmleri sevmiş?
+Bu, insan ilişkilerine çok benzer. “Arkadaşım şu filmi sevmiş, ben de beğenirim” düşüncesi
+matematiksel hale gelir.
+User-Based Collaborative Filtering
+Burada kullanıcılar arası benzerlik bulunur.
+• Kullanıcıların puan verdiği filmler bir matris haline getirilir
+• Bu matris üzerinden cosine similarity ile kullanıcı benzerliği hesaplanır
+• Benzer kullanıcıların yüksek puan verdiği filmler önerilir
+Avantaj:
+• Gerçek kullanıcı davranışına dayanır
+• İçerik gerektirmez
+Item-Based Collaborative Filtering
+Bu yöntem film merkezlidir.
+Mantık: “X filmi seven kullanıcılar başka ne sevmiş?”
+Burada kullanıcı yerine filmler arasındaki ortak puanlama davranışı analiz edilir.
+Netflix uzun yıllar bu yöntemi kullanmıştır, çünkü çok verimlidir.
+3. Bileşen: Hybrid (Melez) Öneri Sistemi
+Bu sistem iki yöntemi birleştirerek daha akıllı bir öneri oluşturur.
+Sadece içerik tabanlı öneri → filmi tanır ama kullanıcıyı tanımaz.
+Sadece collaborative öneri → kullanıcıyı tanır ama filmin içeriğini bilmez.
+İkisini birleştirmek:
+• Hem kullanıcıyı anlar
+• Hem film içeriklerini anlar
+• Daha doğru öneri üretir
+Örneğin:
+• X filmine benzeyen filmlerden
+• Kullanıcı 5’in beğenebileceği filmler seçilir
+• Ardından benzer kullanıcıların önerileriyle çakıştırılır
+• En anlamlı liste oluşturulur
+Bu yöntem bugün Netflix, Amazon Prime, Disney+ gibi platformlarda kullanılan modern
+yaklaşımın temelidir.

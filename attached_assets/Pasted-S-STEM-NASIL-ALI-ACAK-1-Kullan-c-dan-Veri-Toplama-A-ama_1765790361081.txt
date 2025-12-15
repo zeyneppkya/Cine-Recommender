@@ -1,0 +1,75 @@
+SİSTEM NASIL ÇALIŞACAK?
+1. Kullanıcıdan Veri Toplama Aşaması
+Sistem ilk adımda kullanıcıya ait verileri toplar. Bunlar şunlardır:
+• İzlediği filmler
+• Verdiği puanlar
+• Favori türleri
+• Daha önce izlediği filmlerin özellikleri (tür, yıl, yönetmen vb.)
+• Kullanıcının etkileşimleri (like, beğenme, arama geçmişi)
+Bu bilgiler sistemin kullanıcı profilini oluşturmasını sağlar.
+
+2. Film Özelliklerinin Hazırlanması
+Sistemde bulunan tüm filmlerin bilgileri işlenir:
+• Türler (action, drama, sci-fi…)
+• Oyuncular
+• Yönetmen
+• Ortalama puan
+• Popülerlik
+• Film açıklaması (plot)
+• Vektörel gösterimler (ör. TF-IDF ile açıklamanın sayısal hale çevrilmesi)
+Bu özellikler daha sonra benzerlik ölçümleri için kullanılır.
+3. İçerik Tabanlı Öneri Modülü (Content-Based)
+Sistem, kullanıcının geçmişte sevdiği filmlerle benzer özelliklere sahip diğer filmleri arar.
+Bunun için:
+• Cosine Similarity
+• Euclidean Distance
+• Manhattan Distance gibi benzerlik ölçümleri kullanılır.
+Örneğin kullanıcı hep bilim kurgu ve aksiyon izliyorsa:
+• Türleri aynı olan,
+• Benzer oyuncu kadrosuna sahip,
+• Yakın yıllarda çekilmiş, filmler öne çıkarılır.
+4. Kullanıcı Tabanlı Öneri Modülü (User-Based Filtering)
+Bu modülde sistem şu soruyu sorar: “Bu kullanıcıya benzeyen başka kullanıcılar ne izledi?”
+Kullanıcılar arasındaki benzerlik:
+• Cosine Similarity
+• Pearson Correlation
+• Hızlandırılmış KNN algoritması ile hesaplanır.
+Eğer A kullanıcısı = B kullanıcısına çok benziyorsa ve B’nin yüksek puan verdiği bir film A’nın
+listesinde yoksa → o film A’ya önerilir.
+5. Film Tabanlı Öneri Modülü (Item-Based Filtering)
+Burada soru şu olur:
+“Bu film, diğer hangi filmlerle birlikte izlenmiş?”
+Bu modül daha stabil ve daha güçlüdür çünkü filmler kullanıcı davranışlarına göre gruplandırılır.
+Örnek: Matrix izleyenlerin %80’i Inception izliyorsa → Inception önerilir.
+6. Hibrit Modelin Karar Mekanizması
+Sistem yukarıdaki tüm modüllerin çıktısını alır ve birleştirir.
+• İçerik tabanlı skor → 0.4
+• Kullanıcı tabanlı skor → 0.3
+• Film tabanlı skor → 0.3
+gibi ağırlıklandırma yapılabilir.
+Sonunda her film için bir “öneri puanı (recommendation score)” üretilir. En yüksek puana sahip
+olan filmler kullanıcının karşısına çıkar.
+7. Sonuçların Kullanıcıya Sunulması
+Sistem:
+• Önerilen filmleri
+• Neden önerildiğini (açıklanabilir AI mantığı)
+• Tür bazlı filtreler
+• Popülerlik ve kişisel beğeni dengesi
+ile birlikte kullanıcıya sunar.
+Örneğin tavsiye ekranı şöyle açıklamalar gösterebilir:
+• "Bu film, sevdiğin bilim kurgu + aksiyon türlerine benziyor."
+• "Bu film, benzer kullanıcıların yüksek puan verdiği bir film."
+• "Bu film, daha önce izlediğin X filmiyle yüksek benzerlik gösteriyor."
+Projenin Ortaya Çıkaracağı Değer ve Beklenen Etkiler
+Bu öneri sistemi, kullanıcıların film keşfetme deneyimini büyük ölçüde zenginleştiren modern ve
+akıllı bir yapıdır. Üretilen sonuçlar tamamen kişiye özel olduğu için kullanıcı platformda daha fazla
+vakit geçirir, memnuniyet artar ve izleme oranları yükselir. Aynı zamanda:
+• Her kullanıcının zevki ve geçmiş davranışları dikkate alındığı için listeler gerçekten “kişiye
+özel” hale gelir.
+• Kullanıcı onlarca sayfayı gezmek yerine doğrudan ilgisini çekecek içeriklere ulaşır.
+• Benzerlik hesaplamaları sayesinde kullanıcı: Daha önce izlediği filmlere benzeyenleri,
+Benzer kullanıcıların izlediklerini ve Aynı kategori içindeki popüler yapımları tek ekranda
+görür.
+• Özellikle içerik tabanlı sistem, film açıklamalarını matematiksel vektörlere çevirerek doğal
+dil işlemeden faydalanır. Bu, güncel teknolojileri kullanmayı öğrenmek için mükemmel bir
+altyapıdır.
