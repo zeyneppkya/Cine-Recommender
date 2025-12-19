@@ -6,6 +6,12 @@
 - **İşbirlikçi Filtreleme**: Kullanıcı puanlama kalıplarını kullanır
 - **Hibrit Sistem**: Daha iyi öneriler için her iki yaklaşımı birleştirir
 
+
+## Canlı Demo
+ [https://cine-recommender-smzu.onrender.com](https://cine-recommender-smzu.onrender.com)
+
+
+
 ## Proje Yapısı
 ```
 ├── app.py                 # Ana Flask uygulaması ve öneri motorları
@@ -63,8 +69,6 @@ Not: SESSION_SECRET ayarlanmazsa uygulama varsayılan geliştirme anahtarını k
 - `POST /api/recommend` - Bir film için öneriler al
 - `GET /api/movies` - Tüm filmlerin listesini al
 
-## Canlı Demo
-[Canlı Demo Bağlantısı](#) *(Yer tutucu - gerçek dağıtım URL'si ile güncellenecek)*
 
 ## Öneri Algoritmaları
 
