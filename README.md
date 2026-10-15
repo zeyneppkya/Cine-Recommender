@@ -7,8 +7,7 @@
 - **Hibrit Sistem**: Daha iyi öneriler için her iki yaklaşımı birleştirir
 
 
-## Canlı Demo
- [https://cine-recommender-smzu.onrender.com](https://cine-recommender-smzu.onrender.com)
+
 
 
 
